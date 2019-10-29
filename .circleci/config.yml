@@ -3,9 +3,11 @@ jobs:
   build:
     docker:
       - image: circleci/golang:1.12
+    environment:
+      GO111MODULE: "on"
     working_directory: /go/src/github.com/lruggieri/daily-coding-problems
     steps:
       - checkout
 
-      - run: go get -v -t -d ./...
+      - run: go mod vendor
       - run: go test -v ./...
