@@ -120,9 +120,39 @@ func TestDeserialize(t *testing.T) {
 				},
 			},
 		},
+		{
+			serializedTree:"root[left[left_left||left_right[left_right_left||left_right_right]]||right[right_left||right_right]]",
+			expectedResult:&Node{
+				Val:"root",
+				Left:&Node{
+					Val:"left",
+					Left:&Node{
+						Val:"left_left",
+					},
+					Right:&Node{
+						Val:"left_right",
+						Left:&Node{
+							Val:"left_right_left",
+						},
+						Right:&Node{
+							Val:"left_right_right",
+						},
+					},
+				},
+				Right:&Node{
+					Val:"right",
+					Left:&Node{
+						Val:"right_left",
+					},
+					Right:&Node{
+						Val:"right_right",
+					},
+				},
+			},
+		},
 	}
 
-	util.Logger.Level = logrus.DebugLevel
+	util.Logger.Level = logrus.InfoLevel
 	for tstIdx, tst := range tests{
 		res,err := Deserialize(tst.serializedTree)
 		if err != nil{
@@ -132,6 +162,28 @@ func TestDeserialize(t *testing.T) {
 		if !compareNodes(tst.expectedResult,res){
 			spew.Dump(res)
 			t.Error("test #",tstIdx,"fails")
+		}
+	}
+}
+
+func TestCommon(t *testing.T){
+	tests := []string{
+		"root",
+		"root[left||right]",
+		"root[left[left_left||left_right]||right[right_left||right_right]]",
+		"root[left[left_left||left_right[left_right_left||left_right_right]]||right[right_left||right_right]]",
+		"root[left[left_left||left_right[left_right_left||left_right_right]]||right[right_left[right_left_left||right_left_right]||right_right]]",
+	}
+
+	for tstIdx,tst := range tests{
+		serialization,err := Deserialize(tst)
+		if err != nil{
+			t.Error("test #",tstIdx,"error:",err)
+			continue
+		}
+		if tst != Serialize(serialization){
+			t.Error("test #",tstIdx,"serialization of deserialization doesn't match original string")
+			continue
 		}
 	}
 }
