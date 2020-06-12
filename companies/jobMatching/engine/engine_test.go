@@ -27,7 +27,7 @@ func TestEngine_Insert(t *testing.T) {
 		},
 	)
 
-	assert.Equal(t, true, equalSliceElements([]int64{1,2}, newEngine.GetJobs()))
+	assert.Equal(t, true, equalSliceElements([]int64{1, 2}, newEngine.GetJobs()))
 }
 
 func TestEngine_GetSimilarJobs(t *testing.T) {
@@ -70,27 +70,29 @@ func TestEngine_GetSimilarJobs(t *testing.T) {
 	)
 
 	assert.Equal(t, []int64{2}, newEngine.GetSimilarJobs(1, 80))
-	assert.Equal(t, []int64{1}, newEngine.GetSimilarJobs(2,80))
-	assert.Equal(t, []int64{}, newEngine.GetSimilarJobs(3,80))
+	assert.Equal(t, []int64{1}, newEngine.GetSimilarJobs(2, 80))
+	assert.Equal(t, []int64{}, newEngine.GetSimilarJobs(3, 80))
 	assert.Equal(t, true,
 		equalSliceElements(
-			[]int64{2,4},
-			newEngine.GetSimilarJobs(1,50),
+			[]int64{2, 4},
+			newEngine.GetSimilarJobs(1, 50),
 		),
 	)
 }
 
 // helps checking if two slices have the same elements (disregarding the position)
-func equalSliceElements(slice1, slice2 []int64) bool{
-	if len(slice1) != len(slice2){return false}
+func equalSliceElements(slice1, slice2 []int64) bool {
+	if len(slice1) != len(slice2) {
+		return false
+	}
 
 	mapSlice1 := make(map[int64]bool, len(slice1))
-	for _,e1 := range slice1{
+	for _, e1 := range slice1 {
 		mapSlice1[e1] = true
 	}
 
-	for _,e2 := range slice2{
-		if _, ok := mapSlice1[e2] ;!ok{
+	for _, e2 := range slice2 {
+		if _, ok := mapSlice1[e2]; !ok {
 			return false
 		}
 	}
