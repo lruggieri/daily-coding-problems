@@ -1,11 +1,10 @@
 package main
 
 import (
-	"github.com/davecgh/go-spew/spew"
-	"github.com/lruggieri/daily-coding-problems/util"
-	"github.com/sirupsen/logrus"
-	"github.com/stretchr/testify/assert"
 	"testing"
+
+	"github.com/davecgh/go-spew/spew"
+	"github.com/stretchr/testify/assert"
 )
 
 func TestSerialize(t *testing.T) {
@@ -130,7 +129,6 @@ func TestDeserialize(t *testing.T) {
 		},
 	}
 
-	util.Logger.Level = logrus.InfoLevel
 	for tstIdx, tst := range tests {
 		res, err := Deserialize(tst.serializedTree)
 		if err != nil {

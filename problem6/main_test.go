@@ -2,8 +2,6 @@ package main
 
 import (
 	"fmt"
-	"github.com/lruggieri/daily-coding-problems/util"
-	"github.com/sirupsen/logrus"
 	"runtime/debug"
 	"testing"
 )
@@ -50,7 +48,6 @@ func TestMemoryAddressToBytesAndBack(t *testing.T) {
 func TestGeneral(t *testing.T) {
 	debug.SetGCPercent(-1) //disable GC
 
-	util.Logger.Level = logrus.InfoLevel
 	head := &XorList{
 		Val: 0,
 	}

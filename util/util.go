@@ -1,10 +1,11 @@
 package util
 
-import "github.com/sirupsen/logrus"
+import (
+	"go.uber.org/zap"
+)
 
-var Logger *logrus.Logger
+var Logger *zap.Logger
 
 func init() {
-	Logger = logrus.New()
-	Logger.Level = logrus.InfoLevel
+	Logger, _ = zap.NewDevelopment()
 }
