@@ -2,9 +2,10 @@ package main
 
 import (
 	"fmt"
-	"github.com/lruggieri/daily-coding-problems/util"
 	"strconv"
 	"unsafe"
+
+	"github.com/lruggieri/daily-coding-problems/util"
 )
 
 const BitSize = 64
@@ -16,13 +17,13 @@ type XorList struct {
 	Xor BinaryMemoryAddress
 }
 
-//xl has to be head
+// xl has to be head
 func (xl *XorList) Add(iVal interface{}) {
 	//first, we have to get to the last list element
 	listElement := xl
 	prevNode := BinaryMemoryAddress(make([]bool, 64))
 	for {
-		util.Logger.Debug("listElement: ", listElement.Val, ". PrevNode: ", prevNode)
+		util.Logger.Debug(fmt.Sprintf("listElement: %v. PrevNode: %v\n", listElement.Val, prevNode))
 		if listElement.Xor == nil {
 			break
 		}
@@ -36,12 +37,11 @@ func (xl *XorList) Add(iVal interface{}) {
 	}
 	newNode := &XorList{Val: iVal}
 	newNodeBytes := MemoryAddressToBytes(fmt.Sprintf("%p", newNode))
-	util.Logger.Debug("newNode created."+
-		"\n\tmemory: ", fmt.Sprintf("%p", newNode),
-		"\n\tbytes:", newNodeBytes)
+	util.Logger.Debug(fmt.Sprintf("newNode created.\n\tmemory: %v\n\tbytes: %v\n",
+		fmt.Sprintf("%p", newNode), newNodeBytes))
 	//changing listElement Xor address based on prevNode and newNode
 	listElement.Xor = MakeXorAddress(prevNode, newNodeBytes)
-	util.Logger.Debug("previously last node Xor:", listElement.Xor)
+	util.Logger.Debug(fmt.Sprintf("previously last node Xor: %v\n", listElement.Xor))
 }
 
 /*
@@ -98,7 +98,7 @@ func MakeXorAddress(iAddr1, iAddr2 BinaryMemoryAddress) (oRes BinaryMemoryAddres
 	return
 }
 
-//from a memory address string representation return a BinaryMemoryAddress. 0x is dropped during the process if present.
+// from a memory address string representation return a BinaryMemoryAddress. 0x is dropped during the process if present.
 func MemoryAddressToBytes(iMemoryAddress string) BinaryMemoryAddress {
 	if len(iMemoryAddress) > 2 {
 		var rawHexAddress string
@@ -124,7 +124,7 @@ func MemoryAddressToBytes(iMemoryAddress string) BinaryMemoryAddress {
 	}
 }
 
-//from a BinaryMemoryAddress return the memory address string representation. No 0x added.
+// from a BinaryMemoryAddress return the memory address string representation. No 0x added.
 func BytesToMemoryAddress(iMemoryBytes BinaryMemoryAddress) (oAddressMemory string) {
 	var uIntRawAddress uint64
 	for i, b := range iMemoryBytes {
