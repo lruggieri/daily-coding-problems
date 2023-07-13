@@ -1,4 +1,4 @@
-\[Hard\]
+[Hard]
 
 This problem was asked by Slack.
 

@@ -1,4 +1,4 @@
-\[Easy\]
+[Easy]
 
 This problem was asked by Google.
 

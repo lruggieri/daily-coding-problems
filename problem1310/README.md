@@ -1,3 +1,5 @@
+[Medium]
+
 This problem was asked by Fitbit.
 
 Given a linked list, rearrange the node values such that they appear in alternating low -> high -> low -> high ... form.

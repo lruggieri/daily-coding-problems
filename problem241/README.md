@@ -1,3 +1,5 @@
+[Easy]
+
 This problem was asked by Palantir.
 
 In academia, the h-index is a metric used to calculate the impact of a researcher's papers. It is calculated as follows:

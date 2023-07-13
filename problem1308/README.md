@@ -1,3 +1,5 @@
+[Medium]
+
 This problem was asked by Samsung.
 
 A group of houses is connected to the main water plant by means of a set of pipes. A house can either be connected by a set of pipes extending directly to the plant, or indirectly by a pipe to a nearby house which is otherwise connected.
